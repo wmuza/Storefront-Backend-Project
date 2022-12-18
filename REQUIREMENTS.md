@@ -5,20 +5,20 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index --> route: './products' [GET]
-- Show (args: product id) --> route: './products/:id' [GET]
-- Create (args: Product)[token required] --> route: './products' [POST]
-- [OPTIONAL] Top 5 most popular products --> route: './five-most-popular-products' [GET]
-- [OPTIONAL] Products by category (args: product category) --> route: './products/:category' [GET]
+- Index ``` route: './products' [GET] ```
+- Show (args: product id) ``` route: './products/:id' [GET] ``` 
+- Create (args: Product)[token required] ``` route: './products' [POST] ``` 
+- [OPTIONAL] Top 5 most popular products ``` route: './five-most-popular-products' [GET] ``` 
+- [OPTIONAL] Products by category (args: product category) ``` route: './products/:category' [GET] ``` 
 
 #### Users
-- Index [token required] --> route: './users' [GET]
-- Show (args: id)[token required] --> route: './users/:id' [GET]
-- Create (args: User)[token required] --> route: './users' [POST]
+- Index [token required] ``` route: './users' [GET] ``` 
+- Show (args: id)[token required] ``` route: './users/:id' [GET] ``` 
+- Create (args: User)[token required] ``` route: './users' [POST] ``` 
 
 #### Orders
-- Current Order by user (args: user id)[token required] --> route: './orders/:id' [GET]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] --> route: './orders/:id/completed' [GET]
+- Current Order by user (args: user id)[token required] ``` route: './orders/:id' [GET] ``` 
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] ``` route: './orders/:id/completed' [GET] ``` 
 
 ## Data Shapes
 #### Product
@@ -40,45 +40,3 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
-
-## Database Tables
-
-#### Products
-```sql
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-		price INTEGER NOT NULL,
-		category VARCHAR(150)
-);
-```
-
-#### Users
-```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(150),
-		password VARCHAR(150),
-		firstName VARCHAR(150),
-    lastName VARCHAR(150)
-);
-```
-
-#### Orders
-```sql
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    status VARCHAR(64),
-		user_id BIGINT REFERENCES users(id)
-);
-```
-
-#### Order Products
-```sql
-CREATE TABLE order_products (
-    id SERIAL PRIMARY KEY,
-    quantity INTEGER,
-		order_id BIGINT REFERENCES orders(id),
-		product_id BIGINT REFERENCES products(id)
-);
-```

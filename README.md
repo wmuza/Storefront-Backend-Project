@@ -1,12 +1,12 @@
-## 1. Database Tables
+## Database Tables
 
 #### Products
 ```sql
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-		price INTEGER NOT NULL,
-		category VARCHAR(150)
+	price INTEGER NOT NULL,
+	category VARCHAR(150)
 );
 ```
 
@@ -15,8 +15,8 @@ CREATE TABLE products (
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(150),
-		password VARCHAR(150),
-		firstName VARCHAR(150),
+	password VARCHAR(150),
+	firstName VARCHAR(150),
     lastName VARCHAR(150)
 );
 ```
@@ -26,7 +26,7 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status VARCHAR(64),
-		user_id BIGINT REFERENCES users(id)
+	user_id BIGINT REFERENCES users(id)
 );
 ```
 
@@ -35,12 +35,12 @@ CREATE TABLE orders (
 CREATE TABLE order_products (
     id SERIAL PRIMARY KEY,
     quantity INTEGER,
-		order_id BIGINT REFERENCES orders(id),
-		product_id BIGINT REFERENCES products(id)
+	order_id BIGINT REFERENCES orders(id),
+	product_id BIGINT REFERENCES products(id)
 );
 ```
 
-## 2. DB Creation and Migrations
+## DB Creation and Migrations
 
 ### (i) DEV Database
 #### In a terminal tab, create and run the database:
@@ -48,7 +48,7 @@ CREATE TABLE order_products (
 2. start psql ```psql postgres```
 3. in psql run the following:
 	 ```sql 
-	 CREATE USER shopping_user WITH PASSWORD '[replace with your password]';
+	 CREATE USER shopping_user WITH PASSWORD 'password123';
 	 ```
 	 ```sql 
 	 CREATE DATABASE shopping;
@@ -99,7 +99,28 @@ Make sure you exit psql and run this command ```npm install db-migrate -g```
   }
 }
 ```
-2. Create the .env file and add the appropriate environment variables based on the databases that you created above
+2. Create the .env file and add the appropriate environment variables based on the databases that you created above. See below
+```env
+#Dev Database
+DEV_HOST=127.0.0.1
+DEV_DATABASE=shopping
+DEV_USER=shopping_user
+DEV_PASSWORD=password123
+
+#Test Database
+TEST_HOST=127.0.0.1
+TEST_DATABASE=shopping_test
+TEST_USER=shopping_user
+TEST_PASSWORD=password123
+
+#environment
+ENV=test
+
+#Secrets
+BCRYPT_PASSWORD=jgkt-@$^^&
+SALT_ROUNDS=10
+TOKEN_SECRET=fdfd.=346565jgkt-@$^^&9
+```
 
 ### (v) Run DB Migrate on Dev and Test Databases
 1. Run the following command ```db-migrate up```
