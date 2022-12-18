@@ -65,39 +65,12 @@ const authenticateUser = async (req: Request, res: Response) => {
   }
 }
 
-const updateUser = async (req: Request, res: Response) => {
-  const user: User = {
-    id: req.body.id,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
-  }
-
-  try {
-    const user_result = await store.update(user)
-    res.json(user_result)
-  } catch (err) {
-    res.status(401)
-    res.json(err)
-  }
-}
-
-const deleteUser = async (req: Request, res: Response) => {
-  try {
-    const user = await store.delete(req.params?.id)
-    res.json(user)
-  } catch (err) {
-    res.status(401)
-    res.json(err)
-  }
-}
 
 const userRoutes = (app: express.Application) => {
   app.get('/users', getUsers)
   app.get('/users/:id', getUser)
   app.post('/users', createUser)
   app.post('/authenticate', authenticateUser)
-  app.put('/users', verifyId, updateUser)
-  app.delete('/users/:id', verifyAuthToken, deleteUser)
 }
 
 export default userRoutes
