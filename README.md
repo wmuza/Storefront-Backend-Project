@@ -12,7 +12,7 @@ cd Storefront-Backend-Project
 
 Now you need to install the dependencies for the server code.
 
-### Set up the Express server
+### Set up the dependencies
 
 ```bash
 npm install
@@ -32,7 +32,7 @@ npm run format
 
 ## 1. DB Creation and Migrations
 
-### (i) DEV Database
+### (i) Dev Database
 #### In a terminal tab, create and run the database:
 1. switch to the postgres user ```su postgres```
 2. start psql ```psql postgres```
@@ -51,7 +51,7 @@ npm run format
 	 ```
 4. to test that it is working run ```\dt``` and it should output "No relations found."
 
-### (ii) DEV Database
+### (ii) Test Database
 #### In a terminal tab, create and run the database:
 1. switch to the postgres database ```\c postgres```
 2. run the following:
