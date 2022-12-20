@@ -30,6 +30,9 @@ npm run lint
 npm run format
 ```
 
+### Ports
+Our database will be running on the default port 5432 and our webserver will be ruunig on port 3000
+
 ## 1. DB Creation and Migrations
 
 ### (i) Dev Database
