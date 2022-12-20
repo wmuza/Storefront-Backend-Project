@@ -1,6 +1,6 @@
 import { Request, Response, Application } from 'express'
 import { DashboardQueries } from '../services/dashboard'
-import { verifyAuthToken } from '../utilities/auth'
+import verifyAuthToken from '../utilities/auth'
 
 const dashboard = new DashboardQueries()
 

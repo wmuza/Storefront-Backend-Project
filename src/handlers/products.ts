@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import { Product, ProductStore } from '../models/products'
-import { verifyAuthToken } from '../utilities/auth'
+import verifyAuthToken from '../utilities/auth'
 
 const store = new ProductStore()
 
