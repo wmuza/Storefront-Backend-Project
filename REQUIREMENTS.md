@@ -47,7 +47,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-	price INTEGER NOT NULL
+    price INTEGER NOT NULL
 );
 ```
 
@@ -56,8 +56,8 @@ CREATE TABLE products (
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(150),
-	password VARCHAR(150),
-	firstName VARCHAR(150),
+    password VARCHAR(150),
+    firstName VARCHAR(150),
     lastName VARCHAR(150)
 );
 ```
@@ -67,7 +67,7 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status VARCHAR(64),
-	user_id BIGINT REFERENCES users(id)
+    user_id BIGINT REFERENCES users(id)
 );
 ```
 
@@ -76,7 +76,7 @@ CREATE TABLE orders (
 CREATE TABLE order_products (
     id SERIAL PRIMARY KEY,
     quantity INTEGER,
-	order_id BIGINT REFERENCES orders(id),
-	product_id BIGINT REFERENCES products(id)
+    order_id BIGINT REFERENCES orders(id),
+    product_id BIGINT REFERENCES products(id)
 );
 ```
