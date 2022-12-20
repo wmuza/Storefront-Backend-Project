@@ -38,7 +38,7 @@ export class DashboardQueries {
     }
   }
 
-  async fiveMostPopularProducts(): Promise<{ name: string; price: string }[]> {
+  async fiveMostPopularProducts(): Promise<{ name: string; price: string | number }[]> {
     try {
       // @ts-ignore
       const conn = await Client.connect()

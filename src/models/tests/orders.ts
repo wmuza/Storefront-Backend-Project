@@ -36,27 +36,6 @@ describe('Order Model', () => {
     })
   })
 
-  it('add product method should add product to order', async () => {
-    const order: OrderProducts = {
-      quantity: 2,
-      order_id: 1,
-      product_id: 1
-    }
-
-    const result = await store.addProduct(
-      order.quantity,
-      order.order_id,
-      order.product_id
-    )
-
-    expect(result).toEqual({
-      id: '1',
-      quantity: 2,
-      order_id: 1,
-      product_id: 1
-    })
-  })
-
   it('index method should return a list of orders', async () => {
     const result = await store.index()
     expect(result).toEqual([
