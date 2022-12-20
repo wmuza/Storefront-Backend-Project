@@ -1,8 +1,10 @@
 import app from '../../server'
 import request from 'supertest';
 import { DashboardQueries } from '../dashboard'
+import { OrderStore } from '../../models/orders'
 
 const store = new DashboardQueries()
+const orderStore = new OrderStore()
 
 describe('Dasboard Models methods testing', () => {
   it('should have an currentOrderByUser method', () => {
@@ -18,22 +20,26 @@ describe('Dasboard Models methods testing', () => {
   })
 
   it('currentOrderByUser method should add a order', async () => {
+		// create order for testing
+		await orderStore.create({ status: 'active', user_id: 1})
     const result = await store.currentOrderByUser('1')
 
     expect(result).toEqual({
       id: '1',
-      status: 'pending',
+      status: 'active',
       user_id: 1
     })
   })
 
   it('completedOrdersByUser method should return a list of orders', async () => {
+		// create a completed order for testing
+		await orderStore.create({ status: 'complete', user_id: 1})
     const result = await store.completedOrdersByUser('1')
 
     expect(result).toEqual([
       {
         id: '1',
-        status: 'pending',
+        status: 'active',
         user_id: 1
       }
     ])

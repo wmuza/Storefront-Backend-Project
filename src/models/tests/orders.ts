@@ -25,13 +25,13 @@ describe('Order Model', () => {
 
   it('create method should add a order', async () => {
     const result = await store.create({
-      status: 'pending',
+      status: 'active',
       user_id: 1
     })
 
     expect(result).toEqual({
       id: '1',
-      status: 'pending',
+      status: 'active',
       user_id: 1
     })
   })
@@ -41,7 +41,7 @@ describe('Order Model', () => {
     expect(result).toEqual([
       {
         id: '1',
-        status: 'pending',
+        status: 'active',
         user_id: 1
       }
     ])

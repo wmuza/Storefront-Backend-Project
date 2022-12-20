@@ -15,18 +15,6 @@ describe('User Model', () => {
     expect(store.create).toBeDefined()
   }) 
 
-  it('index method should return a list of users', async () => {
-    const result = await store.index()
-    expect(result).toEqual([
-      {
-        id: '1',
-        username: 'wmuza',
-        firstName: 'Wilbert',
-        lastName: 'Muza'
-      }
-    ])
-  })
-
   it('create method should add a user', async () => {
     const result = await store.create({
       username: 'wmuza',
@@ -42,12 +30,24 @@ describe('User Model', () => {
     })
   })
 
+  it('index method should return a list of users', async () => {
+    const result = await store.index()
+    expect(result).toEqual([
+      {
+        id: '1',
+        username: 'wmuza',
+        firstName: 'Wilbert',
+        lastName: 'Muza'
+      }
+    ])
+  })  
+
   it('show method should return the correct user', async () => {
     const result = await store.show('1')
     expect(result).toEqual({
-      username: 'wmuza',
-      firstName: 'Wilbertz',
-      lastName: 'Group'
+        username: 'wmuza',
+        firstName: 'Wilbert',
+        lastName: 'Muza'
     })
   })
 
