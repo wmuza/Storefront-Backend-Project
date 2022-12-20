@@ -1,8 +1,10 @@
+import app from '../../server'
+import request from 'supertest';
 import { DashboardQueries } from '../dashboard'
 
 const store = new DashboardQueries()
 
-describe('Order Model', () => {
+describe('Dasboard Models methods testing', () => {
   it('should have an currentOrderByUser method', () => {
     expect(store.currentOrderByUser).toBeDefined()
   })
@@ -48,3 +50,47 @@ describe('Order Model', () => {
 		])
   })
 })
+
+describe('Test Dashboard Endpoints', () : void => {
+	let userToken: string;
+
+	it('Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/authenticate')
+		.send({ username: 'wmuza', password: 'password123' })
+    .set('Accept', 'application/json')
+
+		expect(response.headers["Content-Type"]).toMatch(/json/);
+    expect(response.status).toEqual(200);
+    expect(response.body.token).toBeDefined();
+
+		userToken = response.body.token
+  });
+
+  it('Gets the /user/:userId/orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/user/1/orders')
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+	it('Gets the /user/:userId/orders/completed endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/user/1/orders/completed')
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+	it('Gets the /five-most-expensive-products endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/five-most-expensive-products')
+
+    expect(response.status).toEqual(200);
+  });
+});

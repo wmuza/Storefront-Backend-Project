@@ -16,8 +16,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create (args: User)[token required] ``` route: './users' [POST] ``` 
 
 #### Orders
-- Current Order by user (args: user id)[token required] ``` route: './orders/user/:userId' [GET] ``` 
-- Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
+- Current Order by user (args: user id)[token required] ``` route: './user/:userId/orders' [GET] ``` 
+- Completed Orders by user (args: user id)[token required] ``` route: './user/:userId/orders/completed' [GET] ``` 
 
 
 ## Database Tables

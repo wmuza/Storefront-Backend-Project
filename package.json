@@ -8,7 +8,7 @@
     "start": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "tsc": "tsc",
-    "test": "jasmine-ts",
+    "test": "ENV=test && npx tsc && db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
     "lint": "eslint --ignore-path .gitignore --ext .ts",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
@@ -34,6 +34,7 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^18.11.13",
     "@types/pg": "^8.6.5",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
     "db-migrate": "^0.11.13",
@@ -48,6 +49,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.5.1",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.0",
     "typescript": "^4.9.4"

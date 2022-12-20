@@ -35,9 +35,9 @@ const fiveMostPopularProducts = async (_req: Request, res: Response) => {
 }
 
 const dashboardRoutes = (app: Application) => {
-  app.get('/orders/user/:userId', verifyAuthToken, currentOrderByUser)
+  app.get('/user/:userId/orders', verifyAuthToken, currentOrderByUser)
   app.get(
-    '/orders/user/:userId/completed',
+    '/user/:userId/orders/completed',
     verifyAuthToken,
     completedOrdersByUser
   )

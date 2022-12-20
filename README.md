@@ -75,17 +75,14 @@ Make sure you exit psql and run this command ```npm install db-migrate -g```
 ### (iv) Add environment variables
 1. Create the .env file in the home directory and add the below details:
 ```env
-#Dev Database
-DEV_HOST=127.0.0.1
-DEV_DATABASE=shopping
-DEV_USER=shopping_user
-DEV_PASSWORD=password123
+#POSTGRES Database
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DATABASE=shopping
+POSTGRES_USER=shopping_user
+POSTGRES_PASSWORD=password123
 
 #Test Database
-TEST_HOST=127.0.0.1
-TEST_DATABASE=shopping_test
-TEST_USER=shopping_user
-TEST_PASSWORD=password123
+POSTGRES_TEST_DB=shopping_test
 
 #environment
 ENV=test
