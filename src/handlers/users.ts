@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express'
 import { User, UserStore } from '../models/users'
-import { verifyId, verifyAuthToken } from '../utilities/auth'
+import { verifyAuthToken } from '../utilities/auth'
 import jwt from 'jsonwebtoken'
 
 const store = new UserStore()
 
-const getUsers = async (_req: Request, res: Response) => {
+const index = async (_req: Request, res: Response) => {
   try {
     const users = await store.index()
     res.json(users)
@@ -15,7 +15,7 @@ const getUsers = async (_req: Request, res: Response) => {
   }
 }
 
-const getUser = async (req: Request, res: Response) => {
+const show = async (req: Request, res: Response) => {
   try {
     const user = await store.show(req.params?.id)
     res.json(user)
@@ -25,7 +25,7 @@ const getUser = async (req: Request, res: Response) => {
   }
 }
 
-const createUser = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response) => {
   const user: User = {
     username: req.body.username,
     password: req.body.password,
@@ -46,7 +46,7 @@ const createUser = async (req: Request, res: Response) => {
   }
 }
 
-const authenticateUser = async (req: Request, res: Response) => {
+const authenticate = async (req: Request, res: Response) => {
   const user: User = {
     username: req.body.username,
     password: req.body.password
@@ -65,12 +65,11 @@ const authenticateUser = async (req: Request, res: Response) => {
   }
 }
 
-
 const userRoutes = (app: express.Application) => {
-  app.get('/users', getUsers)
-  app.get('/users/:id', getUser)
-  app.post('/users', createUser)
-  app.post('/authenticate', authenticateUser)
+  app.get('/users', verifyAuthToken, index)
+  app.get('/users/:id', verifyAuthToken, show)
+  app.post('/users', verifyAuthToken, create)
+  app.post('/authenticate', authenticate)
 }
 
 export default userRoutes

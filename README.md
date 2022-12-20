@@ -1,3 +1,20 @@
+## API Endpoints
+#### Products
+- Index ``` route: './products' [GET] ```
+- Show (args: product id) ``` route: './products/:id' [GET] ``` 
+- Create (args: Product)[token required] ``` route: './products' [POST] ``` 
+- Top 5 most popular products ``` route: './five-most-popular-products' [GET] ```  
+
+#### Users
+- Index [token required] ``` route: './users' [GET] ``` 
+- Show (args: id)[token required] ``` route: './users/:id' [GET] ``` 
+- Create (args: User)[token required] ``` route: './users' [POST] ``` 
+
+#### Orders
+- Current Order by user (args: user id)[token required] ``` route: './orders/user/:userId' [GET] ``` 
+- Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
+
+
 ## Database Tables
 
 #### Products
@@ -5,8 +22,7 @@
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-	price INTEGER NOT NULL,
-	category VARCHAR(150)
+	price INTEGER NOT NULL
 );
 ```
 

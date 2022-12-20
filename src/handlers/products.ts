@@ -4,7 +4,7 @@ import { verifyAuthToken } from '../utilities/auth'
 
 const store = new ProductStore()
 
-const getProducts = async (_req: Request, res: Response) => {
+const index = async (_req: Request, res: Response) => {
   try {
     const products = await store.index()
     res.json(products)
@@ -14,7 +14,7 @@ const getProducts = async (_req: Request, res: Response) => {
   }
 }
 
-const getProduct = async (req: Request, res: Response) => {
+const show = async (req: Request, res: Response) => {
   try {
     const product = await store.show(req.params?.id)
     res.json(product)
@@ -24,7 +24,7 @@ const getProduct = async (req: Request, res: Response) => {
   }
 }
 
-const createProduct = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response) => {
   const product: Product = {
     name: req.body.name,
     price: req.body.price
@@ -66,9 +66,9 @@ const deleteProduct = async (req: Request, res: Response) => {
 }
 
 const productRoutes = (app: express.Application) => {
-  app.get('/products', getProducts)
-  app.get('/products/:id', getProduct)
-  app.post('/products', verifyAuthToken, createProduct)
+  app.get('/products', index)
+  app.get('/products/:id', show)
+  app.post('/products', verifyAuthToken, create)
   app.put('/products', verifyAuthToken, updateProduct)
   app.delete('/products/:id', verifyAuthToken, deleteProduct)
 }

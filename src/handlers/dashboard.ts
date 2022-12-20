@@ -1,27 +1,43 @@
 import { Request, Response, Application } from 'express'
 import { DashboardQueries } from '../services/dashboard'
-
-const dashboardRoutes = (app: Application) => {
-  app.get('/products_in_orders', productsInOrders)
-  app.get('/users_with_orders', usersWithOrders)
-  app.get('/five-expensive-products', fiveExpensiveProducts)
-}
+import { verifyAuthToken } from '../utilities/auth'
 
 const dashboard = new DashboardQueries()
 
-const productsInOrders = async (_req: Request, res: Response) => {
-  const products = await dashboard.productsInOrders()
-  res.json(products)
+const currentOrderByUser = async (req: Request, res: Response) => {
+  try {
+    const order = await dashboard.currentOrderByUser(req.params?.userId)
+    res.json(order)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
 }
 
-const usersWithOrders = async (_req: Request, res: Response) => {
-  const users = await dashboard.usersWithOrders()
-  res.json(users)
+const completedOrdersByUser = async (req: Request, res: Response) => {
+  try {
+    const order = await dashboard.completedOrdersByUser(req.params?.userId)
+    res.json(order)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
 }
 
-const fiveExpensiveProducts = async (_req: Request, res: Response) => {
-  const products = await dashboard.fiveExpensiveProducts()
-  res.json(products)
+const fiveMostPopularProducts = async (_req: Request, res: Response) => {
+  try {
+    const products = await dashboard.fiveMostPopularProducts()
+    res.json(products)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }  
+}
+
+const dashboardRoutes = (app: Application) => {
+  app.get('/orders/user/:userId', verifyAuthToken, currentOrderByUser)
+  app.get('/orders/user/:userId/completed', verifyAuthToken, completedOrdersByUser)
+  app.get('/five-most-expensive-products', fiveMostPopularProducts)
 }
 
 export default dashboardRoutes

@@ -8,8 +8,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index ``` route: './products' [GET] ```
 - Show (args: product id) ``` route: './products/:id' [GET] ``` 
 - Create (args: Product)[token required] ``` route: './products' [POST] ``` 
-- [OPTIONAL] Top 5 most popular products ``` route: './five-most-popular-products' [GET] ``` 
-- [OPTIONAL] Products by category (args: product category) ``` route: './products/:category' [GET] ``` 
+- Top 5 most popular products ``` route: './five-most-popular-products' [GET] ```  
 
 #### Users
 - Index [token required] ``` route: './users' [GET] ``` 
@@ -17,15 +16,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Create (args: User)[token required] ``` route: './users' [POST] ``` 
 
 #### Orders
-- Current Order by user (args: user id)[token required] ``` route: './orders/:id' [GET] ``` 
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] ``` route: './orders/:id/completed' [GET] ``` 
+- Current Order by user (args: user id)[token required] ``` route: './orders/user/:userId' [GET] ``` 
+- Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
 
 ## Data Shapes
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
 
 #### User
 - id
