@@ -20,26 +20,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
 
 
-## Data Shapes
-#### Product
--  id
-- name
-- price
-
-#### User
-- id
-- firstName
-- lastName
-- password
-
-#### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
-
-
 ## Database Tables
 
 #### Products
