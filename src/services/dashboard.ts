@@ -1,11 +1,11 @@
 import Client from '../database'
-import { Order } from '../models/orders';
+import { Order } from '../models/orders'
 
 export class DashboardQueries {
-
   async currentOrderByUser(id: string): Promise<Order> {
     try {
-      const sql = 'SELECT * FROM orders WHERE user_id=($1) ORDER BY id DESC RETURNING *'
+      const sql =
+        'SELECT * FROM orders WHERE user_id=($1) ORDER BY id DESC RETURNING *'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -21,7 +21,8 @@ export class DashboardQueries {
 
   async completedOrdersByUser(id: string): Promise<Order[]> {
     try {
-      const sql = 'SELECT * FROM orders WHERE user_id=($1) AND status=($2) ORDER BY id DESC RETURNING *'
+      const sql =
+        'SELECT * FROM orders WHERE user_id=($1) AND status=($2) ORDER BY id DESC RETURNING *'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -31,7 +32,9 @@ export class DashboardQueries {
 
       return result.rows
     } catch (err) {
-      throw new Error(`Could not get completed orders for user ${id}. Error: ${err}`)
+      throw new Error(
+        `Could not get completed orders for user ${id}. Error: ${err}`
+      )
     }
   }
 

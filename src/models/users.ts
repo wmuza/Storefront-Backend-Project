@@ -74,8 +74,7 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await Client.connect()
-      const sql =
-        'SELECT username, password FROM users WHERE username=($1)'
+      const sql = 'SELECT username, password FROM users WHERE username=($1)'
 
       const result = await conn.query(sql, [user.username])
       const user_result = result.rows[0]
@@ -94,5 +93,4 @@ export class UserStore {
       throw new Error(`Could not get users. Error: ${err}`)
     }
   }
-
 }

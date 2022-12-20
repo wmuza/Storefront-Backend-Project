@@ -31,12 +31,16 @@ const fiveMostPopularProducts = async (_req: Request, res: Response) => {
   } catch (err) {
     res.status(400)
     res.json(err)
-  }  
+  }
 }
 
 const dashboardRoutes = (app: Application) => {
   app.get('/orders/user/:userId', verifyAuthToken, currentOrderByUser)
-  app.get('/orders/user/:userId/completed', verifyAuthToken, completedOrdersByUser)
+  app.get(
+    '/orders/user/:userId/completed',
+    verifyAuthToken,
+    completedOrdersByUser
+  )
   app.get('/five-most-expensive-products', fiveMostPopularProducts)
 }
 
