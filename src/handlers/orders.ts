@@ -55,7 +55,7 @@ const update = async (req: Request, res: Response) => {
   }
 }
 
-const deleteOrder = async (req: Request, res: Response) => {
+const remove = async (req: Request, res: Response) => {
   try {
     const order = await store.delete(req.params?.id)
     res.json(order)
@@ -66,11 +66,11 @@ const deleteOrder = async (req: Request, res: Response) => {
 }
 
 const orderRoutes = (app: express.Application) => {
-  app.get('/orders', index)
-  app.get('/orders/:id', show)
+  app.get('/orders', verifyAuthToken, index)
+  app.get('/orders/:id', verifyAuthToken, show)
   app.post('/orders', verifyAuthToken, create)
   app.put('/orders', verifyAuthToken, update)
-  app.delete('/orders/:id', verifyAuthToken, deleteOrder)
+  app.delete('/orders/:id', verifyAuthToken, remove)
 }
 
 export default orderRoutes

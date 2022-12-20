@@ -39,7 +39,7 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
-const updateProduct = async (req: Request, res: Response) => {
+const update = async (req: Request, res: Response) => {
   const product: Product = {
     id: req.body.id,
     name: req.body.name,
@@ -55,7 +55,7 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 }
 
-const deleteProduct = async (req: Request, res: Response) => {
+const remove = async (req: Request, res: Response) => {
   try {
     const product = await store.delete(req.params?.id)
     res.json(product)
@@ -69,8 +69,8 @@ const productRoutes = (app: express.Application) => {
   app.get('/products', index)
   app.get('/products/:id', show)
   app.post('/products', verifyAuthToken, create)
-  app.put('/products', verifyAuthToken, updateProduct)
-  app.delete('/products/:id', verifyAuthToken, deleteProduct)
+  app.put('/products', verifyAuthToken, update)
+  app.delete('/products/:id', verifyAuthToken, remove)
 }
 
 export default productRoutes

@@ -1,62 +1,36 @@
-## API Endpoints
-#### Products
-- Index ``` route: './products' [GET] ```
-- Show (args: product id) ``` route: './products/:id' [GET] ``` 
-- Create (args: Product)[token required] ``` route: './products' [POST] ``` 
-- Top 5 most popular products ``` route: './five-most-popular-products' [GET] ```  
+# Udacity Image Processing API
+The company stakeholders want to create an online storefront to showcase their great product ideas. Users need to be able to browse an index of all products, see the specifics of a single product, and add products to an order that they can view in a cart page. I have been tasked with building the API that will support this application, and my coworker who is building the frontend.
 
-#### Users
-- Index [token required] ``` route: './users' [GET] ``` 
-- Show (args: id)[token required] ``` route: './users/:id' [GET] ``` 
-- Create (args: User)[token required] ``` route: './users' [POST] ``` 
+## Project setup
 
-#### Orders
-- Current Order by user (args: user id)[token required] ``` route: './orders/user/:userId' [GET] ``` 
-- Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
+First, clone this repo and switch into the repo folder:
 
-
-## Database Tables
-
-#### Products
-```sql
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-	price INTEGER NOT NULL
-);
+```bash
+git clone https://github.com/wmuza/Storefront-Backend-Project.git
+cd Storefront-Backend-Project
 ```
 
-#### Users
-```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(150),
-	password VARCHAR(150),
-	firstName VARCHAR(150),
-    lastName VARCHAR(150)
-);
+Now you need to install the dependencies for the server code.
+
+### Set up the Express server
+
+```bash
+npm install
 ```
 
-#### Orders
-```sql
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    status VARCHAR(64),
-	user_id BIGINT REFERENCES users(id)
-);
+### Lint the code using Eslint
+
+```bash
+npm run lint
 ```
 
-#### Order Products
-```sql
-CREATE TABLE order_products (
-    id SERIAL PRIMARY KEY,
-    quantity INTEGER,
-	order_id BIGINT REFERENCES orders(id),
-	product_id BIGINT REFERENCES products(id)
-);
+### Format the code using Prettier
+
+```bash
+npm run format
 ```
 
-## DB Creation and Migrations
+## 1. DB Creation and Migrations
 
 ### (i) DEV Database
 #### In a terminal tab, create and run the database:
@@ -95,27 +69,8 @@ CREATE TABLE order_products (
 ### (iii) Install DB Migrate
 Make sure you exit psql and run this command ```npm install db-migrate -g```
 
-### (iv) Create database.json and add your password in .env
-1. Create database.json in the root of the project and add the following 
-```json
-{
-  "dev": {
-    "driver": "pg",
-    "host": {"ENV": "DEV_HOST"},
-    "database": {"ENV": "DEV_DATABASE"},
-    "user": {"ENV": "DEV_USER"},
-    "password": {"ENV": "DEV_PASSWORD"}
-  },
-  "test": {
-    "driver": "pg",
-    "host": {"ENV": "TEST_HOST"},
-    "database": {"ENV": "TEST_DATABASE"},
-    "user": {"ENV": "TEST_USER"},
-    "password": {"ENV": "TEST_PASSWORD"}
-  }
-}
-```
-2. Create the .env file and add the appropriate environment variables based on the databases that you created above. See below
+### (iv) Add environment variables
+1. Create the .env file in the home directory and add the below details:
 ```env
 #Dev Database
 DEV_HOST=127.0.0.1

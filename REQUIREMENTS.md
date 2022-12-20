@@ -19,6 +19,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Current Order by user (args: user id)[token required] ``` route: './orders/user/:userId' [GET] ``` 
 - Completed Orders by user (args: user id)[token required] ``` route: './orders/user/:userId/completed' [GET] ``` 
 
+
 ## Data Shapes
 #### Product
 -  id
@@ -38,3 +39,44 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+
+## Database Tables
+
+#### Products
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+	price INTEGER NOT NULL
+);
+```
+
+#### Users
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(150),
+	password VARCHAR(150),
+	firstName VARCHAR(150),
+    lastName VARCHAR(150)
+);
+```
+
+#### Orders
+```sql
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(64),
+	user_id BIGINT REFERENCES users(id)
+);
+```
+
+#### Order Products
+```sql
+CREATE TABLE order_products (
+    id SERIAL PRIMARY KEY,
+    quantity INTEGER,
+	order_id BIGINT REFERENCES orders(id),
+	product_id BIGINT REFERENCES products(id)
+);
+```
