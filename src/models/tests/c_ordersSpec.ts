@@ -79,40 +79,10 @@ describe('3.10 Unit testing the Order Endpoints', () : void => {
 
   beforeEach(function() {
       originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
   });
 
-  it('3.11 Create the orders endpoint', async (): Promise<void> => {
-    //Test the endpoint and see if it returns status code of 200
-    const response = await request(app)
-		.post('/orders')
-    .send({ status: 'active', user_id: 1 })
-		.set('Authorization', `Basic ${userToken}`)
-
-    expect(response.status).toEqual(200);
-  });
-
-  it('3.12 Create the orders endpoint', async (): Promise<void> => {
-    //Test the endpoint and see if it returns status code of 200
-    const response = await request(app)
-		.put('/orders')
-    .send({id: 1, status: 'complete', user_id: 1})
-		.set('Authorization', `Basic ${userToken}`)
-
-    expect(response.status).toEqual(200);
-  });
-
-  it('3.13 Create the orders endpoint', async (): Promise<void> => {
-    //Test the endpoint and see if it returns status code of 200
-    const response = await request(app)
-		.post('/orders/1/products')
-    .send({quantity: 12, order_id: 1, product_id: 1})
-		.set('Authorization', `Basic ${userToken}`)
-
-    expect(response.status).toEqual(200);
-  });
-
-	it('3.14 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
+  it('3.11 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
 		.post('/authenticate')
@@ -124,6 +94,36 @@ describe('3.10 Unit testing the Order Endpoints', () : void => {
     expect(userToken).toBeTruthy()
     expect(response.status).toEqual(200);
   })
+
+  it('3.12 Create the orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/orders')
+    .send({ status: 'active', user_id: 1 })
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('3.13 Update the order endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.put('/orders')
+    .send({id: 1, status: 'complete', user_id: 1})
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('3.14 Create the order products endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/orders/1/products')
+    .send({quantity: 12, order_id: 1, product_id: 1})
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
 
   it('3.15 Gets the /orders endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
