@@ -71,6 +71,7 @@ Our database will be running on the default port 5432 and our webserver will be 
 
 ### (iii) Install DB Migrate
 Make sure you exit psql and run this command ```npm install db-migrate -g```
+Make sure you exit psql and run this command ```npm install -g db-migrate-pg```
 
 ### (iv) Add environment variables
 1. Create the .env file in the home directory and add the below details:
