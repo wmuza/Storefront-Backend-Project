@@ -18,7 +18,7 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await Client.connect()
-      const sql = 'SELECT * FROM users RETURNING id, username, firstname, lastname'
+      const sql = 'SELECT * FROM users'
 
       const result = await conn.query(sql)
 
@@ -33,7 +33,7 @@ export class UserStore {
   async show(id: string): Promise<User> {
     try {
       const sql =
-        'SELECT * FROM users WHERE id=($1) RETURNING username, firstname, lastname'
+        'SELECT * FROM users WHERE id=($1)'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -50,7 +50,7 @@ export class UserStore {
   async create(user: User): Promise<User> {
     try {
       const sql =
-        'INSERT INTO users (username, password, firstname, lastname) VALUES($1, $2, $3, $4) RETURNING username, firstname, lastname'
+        'INSERT INTO users (username, password, firstname, lastname) VALUES($1, $2, $3, $4) RETURNING *'
       // @ts-ignore
       const conn = await Client.connect()
       const saltRounds = parseInt(process.env.SALT_ROUNDS as string)
