@@ -4,7 +4,7 @@ import Client from '../database'
 export type Product = {
   id?: string
   name: string
-  price: number
+  price: number | string
 }
 
 export class ProductStore {

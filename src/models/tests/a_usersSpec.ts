@@ -2,7 +2,7 @@ import { UserStore } from '../users'
 
 const store = new UserStore()
 
-describe('User Model', () => {
+describe('1. Unit testing the user model', () => {
   it('1.1 should have an index method', function (): void {
     expect(store.index).toBeDefined()
   })
