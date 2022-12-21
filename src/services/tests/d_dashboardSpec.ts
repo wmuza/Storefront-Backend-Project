@@ -20,10 +20,7 @@ describe('4. Unit testing the Dasboard Models', () => {
   })
 
   it('4.4 Should return a list of orders made by a user', async () => {
-		// create order for testing
     const result = await store.currentOrderByUser('1')
-
-    console.log(result)
 
     expect(result).toBeTruthy()
   })
@@ -31,15 +28,11 @@ describe('4. Unit testing the Dasboard Models', () => {
   it('4.5 Should return a list of orders', async () => {
     const result = await store.completedOrdersByUser('1')
 
-    console.log(result)
-
     expect(result).toBeTruthy()
   })
 
   it('4.6 Should return a list of the 5 most popular products', async () => {
     const result = await store.fiveMostPopularProducts()
-
-    console.log(result)
 
     expect(result).toBeTruthy()
   })

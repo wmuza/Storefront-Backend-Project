@@ -5,12 +5,11 @@ export class DashboardQueries {
   async currentOrderByUser(id: string): Promise<Order> {
     try {
       const sql =
-        `SELECT id, name, status, quantity, price 
+        `SELECT name, status, quantity, price 
          FROM orders 
          INNER JOIN order_products ON orders.id = order_products.order_id 
          INNER JOIN products ON order_products.product_id = products.id
-         WHERE user_id=($1) 
-         ORDER BY orders.id DESC
+         WHERE user_id=($1)
         `
       // @ts-ignore
       const conn = await Client.connect()
@@ -28,12 +27,11 @@ export class DashboardQueries {
   async completedOrdersByUser(id: string): Promise<Order[]> {
     try {
       const sql =
-        `SELECT id, name, status, quantity, price 
+        `SELECT name, status, quantity, price 
          FROM orders 
          INNER JOIN order_products ON orders.id = order_products.order_id 
          INNER JOIN products ON order_products.product_id = products.id
          WHERE user_id=($1) AND status=($2)
-         ORDER BY orders.id DESC
         `
       // @ts-ignore
       const conn = await Client.connect()
