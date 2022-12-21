@@ -48,7 +48,7 @@ describe('2. Unit testing the Product Model', () => {
     expect(result).toEqual({
       id: '1',
       name: 'New Product',
-      price: '60'
+      price: 60
     })
   })
 

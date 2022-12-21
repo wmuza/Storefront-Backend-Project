@@ -26,7 +26,7 @@ export class ProductStore {
 
   async show(id: string): Promise<Product> {
     try {
-      const sql = 'SELECT * FROM products WHERE id=($1) RETURNING *'
+      const sql = 'SELECT * FROM products WHERE id=($1)'
       // @ts-ignore
       const conn = await Client.connect()
 
