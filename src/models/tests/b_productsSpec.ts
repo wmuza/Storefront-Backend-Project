@@ -45,11 +45,8 @@ describe('2. Unit testing the Product Model', () => {
       price: '60'
     })
 
-    expect(result).toEqual({
-      id: parseInt(productID),
-      name: 'New Product',
-      price: 60
-    })
+    expect(result.name).toEqual('New Product')
+    expect(result.price).toEqual(60)
   })
 
   it('2.8 Show method should return the correct product', async () => {
