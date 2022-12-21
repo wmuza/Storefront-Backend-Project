@@ -3,19 +3,19 @@ import { UserStore } from '../users'
 const store = new UserStore()
 
 describe('User Model', () => {
-  it('should have an index method', () => {
+  it('1.1 should have an index method', function (): void {
     expect(store.index).toBeDefined()
   })
 
-  it('should have a show method', () => {
+  it('1.2 should have a show method', function (): void {
     expect(store.show).toBeDefined()
   })
 
-  it('should have a create method', () => {
+  it('1.3 should have a create method', function (): void {
     expect(store.create).toBeDefined()
   }) 
 
-  it('create method should add a user', async () => {
+  it('1.4 create method should add a user', async function (): Promise<void> {
     const result = await store.create({
       username: 'wmuza',
       password: 'password123',
@@ -24,32 +24,26 @@ describe('User Model', () => {
     })
 
     expect(result.username).toEqual('wmuza');
-    expect(result.firstname).toEqual('Wilbert');
-    expect(result.lastname).toEqual('Muza');
   })
 
-  it('index method should return a list of users', async () => {
+  it('1.5 index method should return a list of users', async function (): Promise<void> {
     const result = await store.index()
 
-    expect(result[0].username).toEqual('wmuza');
     expect(result[0].firstname).toEqual('Wilbert');
-    expect(result[0].lastname).toEqual('Muza');
   })  
 
-  it('show method should return the correct user', async () => {
+  it('1.6 show method should return the correct user', async function (): Promise<void> {
     const result = await store.show('1')
 
-    expect(result.username).toEqual('wmuza');
-    expect(result.firstname).toEqual('Wilbert');
     expect(result.lastname).toEqual('Muza');
   })
 
-  xit('authenticate method should be true', async () => {
+  it('1.7 authenticate method should be true', async function (): Promise<void> {
     const result = await store.authenticate({
       username: 'wmuza',
       password: 'password123'
     })
 
-    expect(result).toBeTrue()
+    expect(result.username).toEqual('wmuza');
   })
 })
