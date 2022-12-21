@@ -70,7 +70,7 @@ export class OrderStore {
   async update(order: Order): Promise<Order> {
     try {
       const sql =
-        'UPDATE orders SET status=($1), user_id=($2) WHERE id=($3)'
+        'UPDATE orders SET status=($1), user_id=($2) WHERE id=($3) RETURNING *'
       // @ts-ignore
       const conn = await Client.connect()
 
