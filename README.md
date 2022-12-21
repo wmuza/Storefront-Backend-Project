@@ -105,6 +105,10 @@ npm run format
 ### Install DB Migrate
 Make sure you exit psql and run this command 
 ```
+npm install -g db-migrate
+```
+
+```
 npm install -g db-migrate-pg
 ```
 
