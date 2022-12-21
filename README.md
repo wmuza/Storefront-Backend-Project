@@ -18,8 +18,14 @@ Our database will be running on the default port 5432 and our webserver will be 
 
 ### (i) Dev Database
 #### In a terminal tab, create and run the database:
-1. switch to the postgres user ```su postgres```
-2. start psql ```psql postgres```
+1. switch to the postgres user 
+```
+su postgres
+```
+2. start psql 
+```
+psql postgres
+```
 3. in psql run the following:
 	 ```sql 
 	 CREATE USER shopping_user WITH PASSWORD 'password123';
