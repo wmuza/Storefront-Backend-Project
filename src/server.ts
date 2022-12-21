@@ -24,7 +24,7 @@ orderRoutes(app)
 dashboardRoutes(app)
 
 app.listen(3000, function () {
-  console.log(`starting app on: ${address}`)
+  process.env.ENV === 'test' ? '' : console.log(`starting app on: ${address}`)
 })
 
 export default app;
