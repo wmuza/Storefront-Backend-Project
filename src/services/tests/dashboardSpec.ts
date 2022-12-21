@@ -6,7 +6,7 @@ import { OrderStore } from '../../models/orders'
 const store = new DashboardQueries()
 const orderStore = new OrderStore()
 
-describe('Dasboard Models methods testing', () => {
+xdescribe('Dasboard Models methods testing', () => {
   it('should have an currentOrderByUser method', () => {
     expect(store.currentOrderByUser).toBeDefined()
   })
@@ -57,7 +57,7 @@ describe('Dasboard Models methods testing', () => {
   })
 })
 
-describe('Test Dashboard Endpoints', () : void => {
+xdescribe('Test Dashboard Endpoints', () : void => {
 	let userToken: string;
 
 	it('Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {

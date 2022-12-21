@@ -8,9 +8,9 @@
   },
   "test": {
     "driver": "pg",
-    "host": {"ENV": "TEST_HOST"},
+    "host": {"ENV": "DEV_HOST"},
     "database": {"ENV": "TEST_DATABASE"},
-    "user": {"ENV": "TEST_USER"},
-    "password": {"ENV": "TEST_PASSWORD"}
+    "user": {"ENV": "DEV_USER"},
+    "password": {"ENV": "DEV_PASSWORD"}
   }
 }
