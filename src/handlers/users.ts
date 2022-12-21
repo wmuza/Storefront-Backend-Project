@@ -52,8 +52,6 @@ const authenticate = async (req: Request, res: Response) => {
     password: req.body.password
   }
 
-  console.log(user)
-
   try {
     const user_result = await store.authenticate(user)
 
@@ -62,6 +60,8 @@ const authenticate = async (req: Request, res: Response) => {
       { user: user_result },
       process.env.TOKEN_SECRET as string
     )
+
+    console.log('token: ', token)
     res.json(token)
   } catch (err) {
     res.status(401)

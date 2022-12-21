@@ -55,7 +55,7 @@ describe('5. Unit testing the Dashboard Endpoints', () : void => {
     expect(response.status).toEqual(200);
     expect(response.body.token).toBeDefined();
 		
-  });
+  })
 
   it('5.2 Gets the /user/:userId/orders endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
