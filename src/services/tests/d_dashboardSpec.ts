@@ -49,12 +49,9 @@ describe('5. Unit testing the Dashboard Endpoints', () : void => {
     .set('Accept', 'application/json')
 
     userToken = response.body.token
-    console.log(userToken)
 
-		expect(response.headers["Content-Type"]).toMatch(/json/);
+    expect(userToken).toBeTruthy()
     expect(response.status).toEqual(200);
-    expect(response.body.token).toBeDefined();
-		
   })
 
   it('5.2 Gets the /user/:userId/orders endpoint', async (): Promise<void> => {

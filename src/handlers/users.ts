@@ -54,15 +54,12 @@ const authenticate = async (req: Request, res: Response) => {
 
   try {
     const user_result = await store.authenticate(user)
-
-    console.log(user_result)
     const token = jwt.sign(
       { user: user_result },
       process.env.TOKEN_SECRET as string
     )
 
-    console.log('token: ', token)
-    res.json(token)
+    res.json({token})
   } catch (err) {
     res.status(401)
     res.json(err)
