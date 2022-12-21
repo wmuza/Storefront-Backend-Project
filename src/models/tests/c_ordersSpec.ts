@@ -75,6 +75,13 @@ describe('3. Unit testing the Order Model', () => {
 describe('3.10 Unit testing the Order Endpoints', () : void => {
 	let userToken: string;
 
+  var originalTimeout: number;
+
+  beforeEach(function() {
+      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+  });
+
   it('3.11 Create the orders endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
@@ -134,6 +141,10 @@ describe('3.10 Unit testing the Order Endpoints', () : void => {
 		.set('Authorization', `Basic ${userToken}`)
 
     expect(response.status).toEqual(200);
+  });
+
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
 })
