@@ -150,3 +150,9 @@ Run the following command
 ```
 npm run test
 ```
+
+### (vii) Startup the server
+Run the following command 
+```
+npm run start
+```
