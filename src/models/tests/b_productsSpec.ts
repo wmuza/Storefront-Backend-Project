@@ -27,7 +27,7 @@ describe('2. Unit testing the Product Model', () => {
       price: '50'
     })
 
-    productID = result.id as string
+    productID = result.id + ""
 
     expect(result).toBeTruthy()
   })
@@ -46,7 +46,7 @@ describe('2. Unit testing the Product Model', () => {
     })
 
     expect(result).toEqual({
-      id: productID,
+      id: parseInt(productID),
       name: 'New Product',
       price: 60
     })
