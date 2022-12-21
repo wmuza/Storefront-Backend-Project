@@ -52,8 +52,12 @@ const authenticate = async (req: Request, res: Response) => {
     password: req.body.password
   }
 
+  console.log(user)
+
   try {
     const user_result = await store.authenticate(user)
+
+    console.log(user_result)
     const token = jwt.sign(
       { user: user_result },
       process.env.TOKEN_SECRET as string
