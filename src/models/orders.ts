@@ -33,7 +33,7 @@ export class OrderStore {
 
   async show(id: string): Promise<Order> {
     try {
-      const sql = 'SELECT * FROM orders WHERE id=($1) RETURNING *'
+      const sql = 'SELECT * FROM orders WHERE id=($1)'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -50,7 +50,7 @@ export class OrderStore {
   async create(order: Order): Promise<Order> {
     try {
       const sql =
-        'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *'
+        'INSERT INTO orders (status, user_id) VALUES($1, $2)'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -70,7 +70,7 @@ export class OrderStore {
   async update(order: Order): Promise<Order> {
     try {
       const sql =
-        'UPDATE orders SET status=($1), user_id=($2) WHERE id=($3) RETURNING *'
+        'UPDATE orders SET status=($1), user_id=($2) WHERE id=($3)'
       // @ts-ignore
       const conn = await Client.connect()
 
