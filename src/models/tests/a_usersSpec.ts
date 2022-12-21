@@ -1,5 +1,7 @@
 import { UserStore } from '../users'
+import dotenv from 'dotenv'
 
+dotenv.config()
 const store = new UserStore()
 
 describe('1. Unit testing the user model', () => {
@@ -18,7 +20,7 @@ describe('1. Unit testing the user model', () => {
   it('1.4 create method should add a user', async function (): Promise<void> {
     const result = await store.create({
       username: 'wmuza',
-      password: 'password123',
+      password: process.env.POSTGRES_PASSWORD,
       firstname: 'Wilbert',
       lastname: 'Muza'
     })
@@ -41,7 +43,7 @@ describe('1. Unit testing the user model', () => {
   it('1.7 authenticate method should be true', async function (): Promise<void> {
     const result = await store.authenticate({
       username: 'wmuza',
-      password: 'password123'
+      password: process.env.POSTGRES_PASSWORD
     })
 
     expect(result.username).toEqual('wmuza');

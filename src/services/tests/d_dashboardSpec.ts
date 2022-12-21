@@ -1,7 +1,10 @@
 import app from '../../server'
+import dotenv from 'dotenv'
 import request from 'supertest';
 import { DashboardQueries } from '../dashboard'
 import { OrderStore } from '../../models/orders'
+
+dotenv.config()
 
 const store = new DashboardQueries()
 const orderStore = new OrderStore()
@@ -45,7 +48,7 @@ describe('5. Unit testing the Dashboard Endpoints', () : void => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
 		.post('/authenticate')
-		.send({ username: 'wmuza', password: 'password123' })
+		.send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
     .set('Accept', 'application/json')
 
     userToken = response.body.token
