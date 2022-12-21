@@ -60,8 +60,6 @@ describe('5. Unit testing the Dashboard Endpoints', () : void => {
 		.get('/user/1/orders')
 		.set('Authorization', `Basic ${userToken}`)
 
-    console.log(response.body)
-
     expect(response.status).toEqual(200);
   });
 
