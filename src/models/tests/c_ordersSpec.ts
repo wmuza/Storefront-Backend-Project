@@ -53,11 +53,8 @@ describe('Order Model', () => {
 
   it('show method should return the correct order', async () => {
     const result = await store.show(orderID)
-    expect(result).toEqual({
-      id: orderID,
-      status: 'complete',
-      user_id: 1
-    })
+
+    expect(result.status).toEqual('complete')
   })
 
   it('delete method should remove the order', async () => {
