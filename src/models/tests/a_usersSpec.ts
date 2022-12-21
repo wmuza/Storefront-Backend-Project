@@ -44,7 +44,7 @@ describe('User Model', () => {
     expect(result.lastname).toEqual('Muza');
   })
 
-  xit('authenticate method should be true', async () => {
+  it('authenticate method should be true', async () => {
     const result = await store.authenticate({
       username: 'wmuza',
       password: 'password123'

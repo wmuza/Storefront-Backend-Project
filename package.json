@@ -45,7 +45,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jasmine": "^4.5.0",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.5.1",

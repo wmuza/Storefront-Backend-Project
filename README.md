@@ -10,25 +10,6 @@ git clone https://github.com/wmuza/Storefront-Backend-Project.git
 cd Storefront-Backend-Project
 ```
 
-Now you need to install the dependencies for the server code.
-
-### Set up the dependencies
-
-```bash
-npm install
-```
-
-### Lint the code using Eslint
-
-```bash
-npm run lint
-```
-
-### Format the code using Prettier
-
-```bash
-npm run format
-```
 
 ### Ports
 Our database will be running on the default port 5432 and our webserver will be ruunig on port 3000
@@ -69,9 +50,54 @@ Our database will be running on the default port 5432 and our webserver will be 
 	 ```
 3. to test that it is working run ```\dt``` and it should output "No relations found."
 
-### (iii) Install DB Migrate
-Make sure you exit psql and run this command ```npm install db-migrate -g```
-Make sure you exit psql and run this command ```npm install -g db-migrate-pg```
+## (ii) Now you need to install the dependencies for the project.
+### Node Version
+Node version 16 or up is required. If not preseent follow the following instructions
+
+Run 
+```javascript
+npm install -g n
+```
+```javascript
+n 16
+```
+```javascript
+PATH="$PATH"
+```
+```javascript
+node -v
+```
+Version should be 16 and if not open another terminal or refresh your current terminal
+
+
+### NPM Version
+NPM version 9 or up is required. If not preseent follow the following instructions
+
+Run 
+```javascript
+npm install -g npm@9.2.0
+```
+
+### Set up the dependencies
+
+```bash
+npm install
+```
+
+### Lint the code using Eslint
+
+```bash
+npm run lint
+```
+
+### Format the code using Prettier
+
+```bash
+npm run format
+```
+
+### Install DB Migrate
+Make sure you exit psql and run this command ```npm install db-migrate -g && npm install -g db-migrate-pg```
 
 ### (iv) Add environment variables
 1. Create the .env file in the home directory and add the below details:
