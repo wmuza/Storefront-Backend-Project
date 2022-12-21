@@ -39,6 +39,26 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
+const addProduct = async (req: Request, res: Response) => {
+  const order: OrderProducts = {
+    quantity: parseInt(req.body.quantity),
+    order_id: parseInt(req.params.id),
+    product_id: parseInt(req.body.product_id)
+  }
+
+  try {
+    const order_result = await store.addProduct(
+      order.quantity,
+      order.order_id,
+      order.product_id
+    )
+    res.json(order_result)
+  } catch (err) {
+    res.status(400)
+    res.json(err)
+  }
+}
+
 const update = async (req: Request, res: Response) => {
   const order: Order = {
     id: req.body.id,
@@ -55,22 +75,12 @@ const update = async (req: Request, res: Response) => {
   }
 }
 
-const remove = async (req: Request, res: Response) => {
-  try {
-    const order = await store.delete(req.params?.id)
-    res.json(order)
-  } catch (err) {
-    res.status(400)
-    res.json(err)
-  }
-}
-
 const orderRoutes = (app: express.Application) => {
   app.get('/orders', verifyAuthToken, index)
   app.get('/orders/:id', verifyAuthToken, show)
   app.post('/orders', verifyAuthToken, create)
   app.put('/orders', verifyAuthToken, update)
-  app.delete('/orders/:id', verifyAuthToken, remove)
+  app.post('/orders/:id/products', verifyAuthToken, addProduct)
 }
 
 export default orderRoutes

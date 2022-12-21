@@ -67,6 +67,38 @@ export class OrderStore {
     }
   }
 
+  async addProduct(
+    quantity: number,
+    orderId: number,
+    productId: number
+  ): Promise<OrderProducts> {
+    try {
+      const order = await this.show(orderId as unknown as string)
+
+      if (order.status == 'closed')
+        throw new Error(
+          `Could not add product ${productId} to a closed order ${orderId}.`
+        )
+
+      const sql =
+        'INSERT INTO order_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *'
+        
+      // @ts-ignore
+      const conn = await Client.connect()
+
+      const result = await conn.query(sql, [quantity, orderId, productId])
+      const order_result = result.rows[0]
+
+      conn.release()
+
+      return order_result
+    } catch (err) {
+      throw new Error(
+        `Could not add product ${productId} to order ${orderId}. Error: ${err}`
+      )
+    }
+  }
+
   async update(order: Order): Promise<Order> {
     try {
       const sql =
@@ -85,24 +117,6 @@ export class OrderStore {
       return result.rows[0]
     } catch (err) {
       throw new Error(`Could not get order ${order.id}. Error: ${err}`)
-    }
-  }
-
-  async delete(id: string): Promise<Order> {
-    try {
-      const sql = 'DELETE FROM orders WHERE id=($1)'
-      // @ts-ignore
-      const conn = await Client.connect()
-
-      const result = await conn.query(sql, [id])
-
-      const order = result.rows[0]
-
-      conn.release()
-
-      return order
-    } catch (err) {
-      throw new Error(`Could not delete order ${id}. Error: ${err}`)
     }
   }
 }

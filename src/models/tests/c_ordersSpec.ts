@@ -1,4 +1,4 @@
-import { OrderStore } from '../orders'
+import { OrderStore, OrderProducts } from '../orders'
 
 const store = new OrderStore()
 
@@ -21,11 +21,7 @@ describe('3. Unit testing the Order Model', () => {
     expect(store.update).toBeDefined()
   })
 
-  it('3.5 Should have a delete method', () => {
-    expect(store.delete).toBeDefined()
-  })
-
-  it('3.6 Create method should add a order', async () => {
+  it('3.5 Create method should add a order', async () => {
     const result = await store.create({
       status: 'active',
       user_id: 1
@@ -36,12 +32,12 @@ describe('3. Unit testing the Order Model', () => {
     expect(result).toBeTruthy()
   })
 
-  it('3.7 Index method should return a list of orders', async () => {
+  it('3.6 Index method should return a list of orders', async () => {
     const result = await store.index()
     expect(result).not.toBe([])
   })
 
-  it('3.8 Update method should return the updated order', async () => {
+  it('3.7 Update method should return the updated order', async () => {
     const result = await store.update({
       id: orderID,
       status: 'complete',
@@ -51,16 +47,25 @@ describe('3. Unit testing the Order Model', () => {
     expect(result).toBeTruthy()
   })
 
-  it('3.9 Show method should return the correct order', async () => {
+  it('3.8 Show method should return the correct order', async () => {
     const result = await store.show(orderID)
 
     expect(result.status).toEqual('complete')
   })
 
-  it('3.10 Delete method should remove the order', async () => {
-    store.delete(orderID)
-    const result = await store.index()
+  it('3.9 Create method should add a order product', async () => {
+    const order: OrderProducts = {
+      quantity: 12,
+      order_id: parseInt(orderID),
+      product_id: 1
+    }
 
-    expect(result).toEqual([])
+    const result = await store.addProduct(
+      order.quantity,
+      order.order_id,
+      order.product_id
+    )
+
+    expect(result.order_id).toEqual(parseInt(orderID))
   })
 })

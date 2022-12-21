@@ -6,20 +6,20 @@ import { OrderStore } from '../../models/orders'
 const store = new DashboardQueries()
 const orderStore = new OrderStore()
 
-xdescribe('Dasboard Models methods testing', () => {
-  it('should have an currentOrderByUser method', () => {
+describe('4. Unit testing the Dasboard Models', () => {
+  it('4.1 Should have an currentOrderByUser method', () => {
     expect(store.currentOrderByUser).toBeDefined()
   })
 
-  it('should have a completedOrdersByUser method', () => {
+  it('4.2 Should have a completedOrdersByUser method', () => {
     expect(store.completedOrdersByUser).toBeDefined()
   })
 
-  it('should have a fiveMostPopularProducts method', () => {
+  it('4.3 Should have a fiveMostPopularProducts method', () => {
     expect(store.fiveMostPopularProducts).toBeDefined()
   })
 
-  it('currentOrderByUser method should add a order', async () => {
+  it('4.4 Should return a list of orders made by a user', async () => {
 		// create order for testing
 		await orderStore.create({ status: 'active', user_id: 1})
     const result = await store.currentOrderByUser('1')
@@ -31,7 +31,7 @@ xdescribe('Dasboard Models methods testing', () => {
     })
   })
 
-  it('completedOrdersByUser method should return a list of orders', async () => {
+  it('4.5 Should return a list of orders', async () => {
 		// create a completed order for testing
 		await orderStore.create({ status: 'complete', user_id: 1})
     const result = await store.completedOrdersByUser('1')
@@ -45,7 +45,7 @@ xdescribe('Dasboard Models methods testing', () => {
     ])
   })
 
-  it('fiveMostPopularProducts method should remove the order', async () => {
+  it('4.6 Should return a list of the 5 most popular products', async () => {
     const result = await store.fiveMostPopularProducts()
 
     expect(result).toEqual([
@@ -57,7 +57,7 @@ xdescribe('Dasboard Models methods testing', () => {
   })
 })
 
-xdescribe('Test Dashboard Endpoints', () : void => {
+xdescribe('5. Unit testing the Dashboard Endpoints', () : void => {
 	let userToken: string;
 
 	it('Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {

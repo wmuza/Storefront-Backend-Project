@@ -5,7 +5,7 @@ export class DashboardQueries {
   async currentOrderByUser(id: string): Promise<Order> {
     try {
       const sql =
-        'SELECT * FROM orders WHERE user_id=($1) ORDER BY id DESC RETURNING *'
+        'SELECT * FROM orders WHERE user_id=($1) ORDER BY id DESC'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -22,7 +22,7 @@ export class DashboardQueries {
   async completedOrdersByUser(id: string): Promise<Order[]> {
     try {
       const sql =
-        'SELECT * FROM orders WHERE user_id=($1) AND status=($2) ORDER BY id DESC RETURNING *'
+        'SELECT * FROM orders WHERE user_id=($1) AND status=($2) ORDER BY id DESC'
       // @ts-ignore
       const conn = await Client.connect()
 
