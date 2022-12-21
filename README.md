@@ -43,7 +43,10 @@ psql postgres
 
 ### (ii) Test Database
 #### In a terminal tab, create and run the database:
-1. switch to the postgres database ```\c postgres```
+1. switch to the postgres database 
+```
+\c postgres
+```
 2. run the following:
 	 ```sql 
 	 CREATE DATABASE shopping_test;
