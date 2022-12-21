@@ -25,6 +25,7 @@ describe('2. Unit testing the Product Model', () => {
 
   it('2.6 Should add a product', async () => {
     const result = await store.create({
+      id: '1',
       name: 'WibiClick',
       price: '50'
     })
