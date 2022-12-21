@@ -66,6 +66,6 @@ describe('3. Unit testing the Order Model', () => {
       order.product_id
     )
 
-    expect(result.order_id).toEqual(parseInt(orderID))
+    expect(result.quantity).toEqual(12)
   })
 })
