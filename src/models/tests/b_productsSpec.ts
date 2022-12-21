@@ -3,6 +3,8 @@ import { ProductStore } from '../products'
 const store = new ProductStore()
 
 describe('2. Unit testing the Product Model', () => {
+  let productID = '1';
+
   it('2.1 Should have an index method', () => {
     expect(store.index).toBeDefined()
   })
@@ -25,6 +27,8 @@ describe('2. Unit testing the Product Model', () => {
       price: '50'
     })
 
+    productID = result.id as string
+
     expect(result).toBeTruthy()
   })
 
@@ -36,20 +40,20 @@ describe('2. Unit testing the Product Model', () => {
 
   it('2.7 Update method should return the updated product', async () => {
     const result = await store.update({
-      id: '1',
+      id: productID,
       name: 'New Product',
       price: '60'
     })
 
     expect(result).toEqual({
-      id: 1,
+      id: productID,
       name: 'New Product',
       price: 60
     })
   })
 
   it('2.8 Show method should return the correct product', async () => {
-    const result = await store.show('1')
+    const result = await store.show(productID)
     expect(result.name).toEqual('New Product')
   })
 

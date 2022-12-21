@@ -1,8 +1,10 @@
-import { OrderStore, OrderProducts } from '../orders'
+import { OrderStore } from '../orders'
 
 const store = new OrderStore()
 
-xdescribe('Order Model', () => {
+describe('Order Model', () => {
+  let orderID = '1';
+
   it('should have an index method', () => {
     expect(store.index).toBeDefined()
   })
@@ -29,8 +31,10 @@ xdescribe('Order Model', () => {
       user_id: 1
     })
 
+    orderID = result.id as string
+
     expect(result).toEqual({
-      id: '1',
+      id: orderID,
       status: 'active',
       user_id: 1
     })
@@ -40,7 +44,7 @@ xdescribe('Order Model', () => {
     const result = await store.index()
     expect(result).toEqual([
       {
-        id: '1',
+        id: orderID,
         status: 'active',
         user_id: 1
       }
@@ -49,29 +53,29 @@ xdescribe('Order Model', () => {
 
   it('update method should return the updated order', async () => {
     const result = await store.update({
-      id: '1',
+      id: orderID,
       status: 'complete',
       user_id: 1
     })
 
     expect(result).toEqual({
-      id: '1',
+      id: orderID,
       status: 'complete',
       user_id: 1
     })
   })
 
   it('show method should return the correct order', async () => {
-    const result = await store.show('1')
+    const result = await store.show(orderID)
     expect(result).toEqual({
-      id: '1',
+      id: orderID,
       status: 'complete',
       user_id: 1
     })
   })
 
   it('delete method should remove the order', async () => {
-    store.delete('1')
+    store.delete(orderID)
     const result = await store.index()
 
     expect(result).toEqual([])
