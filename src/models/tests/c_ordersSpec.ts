@@ -1,3 +1,5 @@
+import app from '../../server'
+import request from 'supertest';
 import { OrderStore, OrderProducts } from '../orders'
 
 const store = new OrderStore()
@@ -68,4 +70,70 @@ describe('3. Unit testing the Order Model', () => {
 
     expect(result.quantity).toEqual(12)
   })
+})
+
+describe('3.10 Unit testing the Order Endpoints', () : void => {
+	let userToken: string;
+
+  it('3.11 Create the orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/orders')
+    .send({ status: 'active', user_id: 1 })
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('3.12 Create the orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.put('/orders')
+    .send({id: 1, status: 'complete', user_id: 1})
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('3.13 Create the orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/orders/1/products')
+    .send({quantity: 12, order_id: 1, product_id: 1})
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+	it('3.14 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/authenticate')
+		.send({ username: 'wmuza', password: 'password123' })
+    .set('Accept', 'application/json')
+
+    userToken = response.body.token
+
+    expect(userToken).toBeTruthy()
+    expect(response.status).toEqual(200);
+  })
+
+  it('3.15 Gets the /orders endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/orders')
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('3.16 Gets the /orders/:id endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/orders/1')
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
 })
