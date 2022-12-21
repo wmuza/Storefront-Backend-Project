@@ -81,7 +81,7 @@ NPM version 9 or up is required. If not preseent follow the following instructio
 
 Run 
 ```javascript
-npm install -g npm@9.2.0
+npm install -g npm@latest
 ```
 
 ### Set up the dependencies
