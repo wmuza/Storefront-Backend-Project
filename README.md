@@ -3,13 +3,16 @@ The company stakeholders want to create an online storefront to showcase their g
 
 ## Project setup
 
-First, clone this repo and switch into the repo folder:
+First, clone this repo:
 
 ```bash
 git clone https://github.com/wmuza/Storefront-Backend-Project.git
-cd Storefront-Backend-Project
 ```
 
+Then switch into the repo folder
+```bash
+cd Storefront-Backend-Project
+```
 
 ### Ports
 Our database will be running on the default port 5432 and our webserver will be ruunig on port 3000
@@ -19,11 +22,11 @@ Our database will be running on the default port 5432 and our webserver will be 
 ### (i) Dev Database
 #### In a terminal tab, create and run the database:
 1. switch to the postgres user 
-```
+```bash
 su postgres
 ```
 2. start psql 
-```
+```bash
 psql postgres
 ```
 3. in psql run the following:
@@ -44,7 +47,7 @@ psql postgres
 ### (ii) Test Database
 #### In a terminal tab, create and run the database:
 1. switch to the postgres database 
-```
+```bash
 \c postgres
 ```
 2. run the following:
@@ -64,16 +67,16 @@ psql postgres
 Node version 16 or up is required. If not preseent follow the following instructions
 
 Run 
-```javascript
+```bash
 npm install -g n
 ```
-```javascript
+```bash
 n 16
 ```
-```javascript
+```bash
 PATH="$PATH"
 ```
-```javascript
+```bash
 node -v
 ```
 Version should be 16 and if not open another terminal or refresh your current terminal
@@ -83,7 +86,7 @@ Version should be 16 and if not open another terminal or refresh your current te
 NPM version 9 or up is required. If not preseent follow the following instructions
 
 Run 
-```javascript
+```bash
 npm install -g npm@latest
 ```
 
@@ -107,11 +110,11 @@ npm run format
 
 ### Install DB Migrate
 Make sure you exit psql and run this command 
-```
+```bash
 npm install -g db-migrate
 ```
 
-```
+```bash
 npm install -g db-migrate-pg
 ```
 
@@ -138,7 +141,7 @@ TOKEN_SECRET=fdfd.=346565jgkt-@$^^&9
 
 ### (v) Run DB Migrate on Dev Database
 Run the following command 
-```
+```bash
 db-migrate up
 ```
 
