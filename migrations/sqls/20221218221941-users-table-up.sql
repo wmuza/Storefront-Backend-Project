@@ -3,5 +3,6 @@ CREATE TABLE users (
     username VARCHAR(150),
 		password VARCHAR(150),
 		firstname VARCHAR(150),
-    lastname VARCHAR(150)
+    lastname VARCHAR(150),
+    timestamp timestamp default current_timestamp
 );

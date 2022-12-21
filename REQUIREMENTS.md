@@ -28,6 +28,7 @@ CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     price INTEGER NOT NULL
+    timestamp timestamp default current_timestamp
 );
 ```
 
@@ -39,6 +40,7 @@ CREATE TABLE users (
     password VARCHAR(150),
     firstname VARCHAR(150),
     lastname VARCHAR(150)
+    timestamp timestamp default current_timestamp
 );
 ```
 
@@ -47,7 +49,8 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     status VARCHAR(64),
-    user_id BIGINT REFERENCES users(id)
+    user_id BIGINT REFERENCES users(id),
+    timestamp timestamp default current_timestamp
 );
 ```
 
@@ -57,6 +60,7 @@ CREATE TABLE order_products (
     id SERIAL PRIMARY KEY,
     quantity INTEGER,
     order_id BIGINT REFERENCES orders(id),
-    product_id BIGINT REFERENCES products(id)
+    product_id BIGINT REFERENCES products(id),
+    timestamp timestamp default current_timestamp
 );
 ```

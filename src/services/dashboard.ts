@@ -10,6 +10,7 @@ export class DashboardQueries {
          INNER JOIN order_products ON orders.id = order_products.order_id 
          INNER JOIN products ON order_products.product_id = products.id
          WHERE user_id=($1)
+         ORDER BY orders.timestamp DESC
         `
       // @ts-ignore
       const conn = await Client.connect()
