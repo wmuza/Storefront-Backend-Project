@@ -103,7 +103,10 @@ npm run format
 ```
 
 ### Install DB Migrate
-Make sure you exit psql and run this command ```npm install db-migrate -g && npm install -g db-migrate-pg```
+Make sure you exit psql and run this command 
+```
+npm install -g db-migrate-pg
+```
 
 ### (iv) Add environment variables
 1. Create the .env file in the home directory and add the below details:
