@@ -1,5 +1,5 @@
 {
-  "POSTGRES": {
+  "dev": {
     "driver": "pg",
     "host": {"ENV": "POSTGRES_HOST"},
     "database": {"ENV": "POSTGRES_DATABASE"},
