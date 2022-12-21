@@ -25,32 +25,19 @@ describe('User Model', () => {
 
     console.log(result)
 
-    expect(result).toEqual({
-      username: 'wmuza',
-      firstname: 'Wilbert',
-      lastname: 'Muza'
-    })
+    expect(result).toEqual({ username: 'wmuza', firstname: 'Wilbert', lastname: 'Muza' })
   })
 
-  xit('index method should return a list of users', async () => {
+  it('index method should return a list of users', async () => {
     const result = await store.index()
-    expect(result).toEqual([
-      {
-        id: '1',
-        username: 'wmuza',
-        firstname: 'Wilbert',
-        lastname: 'Muza'
-      }
-    ])
+    console.log(result)
+    expect(result).toEqual([{ username: 'wmuza', firstname: 'Wilbert', lastname: 'Muza' }])
   })  
 
-  xit('show method should return the correct user', async () => {
+  it('show method should return the correct user', async () => {
     const result = await store.show('1')
-    expect(result).toEqual({
-        username: 'wmuza',
-        firstname: 'Wilbert',
-        lastname: 'Muza'
-    })
+    console.log(result)
+    expect(result).toEqual({ username: 'wmuza', firstname: 'Wilbert', lastname: 'Muza' })
   })
 
   xit('authenticate method should be true', async () => {
