@@ -19,14 +19,14 @@ describe('User Model', () => {
     const result = await store.create({
       username: 'wmuza',
       password: 'password123',
-      firstName: 'Wilbert',
-      lastName: 'Muza'
+      firstname: 'Wilbert',
+      lastname: 'Muza'
     })
 
     expect(result).toEqual({
       username: 'wmuza',
-      firstName: 'Wilbert',
-      lastName: 'Muza'
+      firstname: 'Wilbert',
+      lastname: 'Muza'
     })
   })
 
@@ -36,8 +36,8 @@ describe('User Model', () => {
       {
         id: '1',
         username: 'wmuza',
-        firstName: 'Wilbert',
-        lastName: 'Muza'
+        firstname: 'Wilbert',
+        lastname: 'Muza'
       }
     ])
   })  
@@ -46,8 +46,8 @@ describe('User Model', () => {
     const result = await store.show('1')
     expect(result).toEqual({
         username: 'wmuza',
-        firstName: 'Wilbert',
-        lastName: 'Muza'
+        firstname: 'Wilbert',
+        lastname: 'Muza'
     })
   })
 

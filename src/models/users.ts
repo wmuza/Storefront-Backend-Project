@@ -9,8 +9,8 @@ export type User = {
   id?: string
   username?: string
   password?: string
-  firstName?: string
-  lastName?: string
+  firstname?: string
+  lastname?: string
 }
 
 export class UserStore {
@@ -18,7 +18,7 @@ export class UserStore {
     try {
       // @ts-ignore
       const conn = await Client.connect()
-      const sql = 'SELECT * FROM users RETURNING id, username, firstName, lastName'
+      const sql = 'SELECT * FROM users RETURNING id, username, firstname, lastname'
 
       const result = await conn.query(sql)
 
@@ -33,7 +33,7 @@ export class UserStore {
   async show(id: string): Promise<User> {
     try {
       const sql =
-        'SELECT * FROM users WHERE id=($1) RETURNING username, firstName, lastName'
+        'SELECT * FROM users WHERE id=($1) RETURNING username, firstname, lastname'
       // @ts-ignore
       const conn = await Client.connect()
 
@@ -50,7 +50,7 @@ export class UserStore {
   async create(user: User): Promise<User> {
     try {
       const sql =
-        'INSERT INTO users (username, password, firstName, lastName) VALUES($1, $2, $3, $4) RETURNING username, firstName, lastName'
+        'INSERT INTO users (username, password, firstname, lastname) VALUES($1, $2, $3, $4) RETURNING username, firstname, lastname'
       // @ts-ignore
       const conn = await Client.connect()
       const saltRounds = parseInt(process.env.SALT_ROUNDS as string)
@@ -58,15 +58,15 @@ export class UserStore {
       const result = await conn.query(sql, [
         user.username,
         hash,
-        user.firstName,
-        user.lastName
+        user.firstname,
+        user.lastname
       ])
       const user_result = result.rows[0]
       conn.release()
 
       return user_result
     } catch (err) {
-      throw new Error(`Could not add user ${user?.firstName}. Error: ${err}`)
+      throw new Error(`Could not add user ${user?.firstname}. Error: ${err}`)
     }
   }
 

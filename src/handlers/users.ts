@@ -29,8 +29,8 @@ const create = async (req: Request, res: Response) => {
   const user: User = {
     username: req.body.username,
     password: req.body.password,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
+    firstname: req.body.firstname,
+    lastname: req.body.lastname
   }
 
   try {
