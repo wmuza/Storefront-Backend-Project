@@ -19,8 +19,6 @@ let db = {
   password: POSTGRES_PASSWORD,
 }
 
-console.log(db.database)
-
 const client = new Pool(db)
 
 export default client
