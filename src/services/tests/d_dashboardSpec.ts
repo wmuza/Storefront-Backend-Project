@@ -54,7 +54,6 @@ describe('5. Unit testing the Dashboard Endpoints', () : void => {
 		expect(response.headers["Content-Type"]).toMatch(/json/);
     expect(response.status).toEqual(200);
     expect(response.body.token).toBeDefined();
-
 		
   });
 
