@@ -1,5 +1,7 @@
 import { UserStore } from '../users'
+import app from '../../server'
 import dotenv from 'dotenv'
+import request from 'supertest';
 
 dotenv.config()
 const store = new UserStore()
@@ -48,4 +50,66 @@ describe('1. Unit testing the user model', () => {
 
     expect(result.username).toEqual('wmuza');
   })
+})
+
+describe('1.10 Unit testing the users Endpoints', () : void => {
+	let userToken: string;
+
+  var originalTimeout: number;
+
+  beforeEach(function() {
+      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
+  });
+
+  it('1.11 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/authenticate')
+		.send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
+    .set('Accept', 'application/json')
+
+    userToken = response.body.token
+
+    expect(userToken).toBeTruthy()
+    expect(response.status).toEqual(200);
+  })
+
+  it('1.12 Create the users endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.post('/users')
+    .send({
+      username: 'wmuza',
+      password: process.env.POSTGRES_PASSWORD,
+      firstname: 'Wilbert',
+      lastname: 'Muza'
+    })
+		.set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('1.13 Gets the /users endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/users')
+    .set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  it('1.14 Gets the /users/:id endpoint', async (): Promise<void> => {
+    //Test the endpoint and see if it returns status code of 200
+    const response = await request(app)
+		.get('/users/1')
+    .set('Authorization', `Basic ${userToken}`)
+
+    expect(response.status).toEqual(200);
+  });
+
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
+
 })
