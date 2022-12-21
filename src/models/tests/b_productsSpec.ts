@@ -40,9 +40,9 @@ describe('2. Unit testing the Product Model', () => {
 
   it('2.8 Update method should return the updated product', async () => {
     const result = await store.update({
-      id: '1',
+      id: 1,
       name: 'New Product',
-      price: '60'
+      price: 60
     })
 
     expect(result).toEqual({
@@ -62,9 +62,9 @@ describe('2. Unit testing the Product Model', () => {
     const result = await store.index()
 
     expect(result).not.toContain({
-      id: '1',
+      id: 1,
       name: 'New Product',
-      price: '60'
+      price: 60
     })
   })
 })

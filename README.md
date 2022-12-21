@@ -130,5 +130,7 @@ TOKEN_SECRET=fdfd.=346565jgkt-@$^^&9
 ```
 
 ### (v) Run DB Migrate on Dev and Test Databases
-1. Run the following command ```db-migrate up```
-2. Run the following command ```db-migrate up -e test```
+1. Run the following command 
+```
+db-migrate up
+```
