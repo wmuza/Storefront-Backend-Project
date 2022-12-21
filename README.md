@@ -133,8 +133,14 @@ SALT_ROUNDS=10
 TOKEN_SECRET=fdfd.=346565jgkt-@$^^&9
 ```
 
-### (v) Run DB Migrate on Dev and Test Databases
-1. Run the following command 
+### (v) Run DB Migrate on Dev Database Test Databases
+Run the following command 
 ```
 db-migrate up
+```
+
+### (vi) Run Unit Tests
+Run the following command 
+```
+npm run test
 ```
