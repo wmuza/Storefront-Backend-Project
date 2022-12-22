@@ -1,12 +1,12 @@
 import app from '../../server'
 import dotenv from 'dotenv'
-import request from 'supertest';
+import request from 'supertest'
 import { ProductStore } from '../products'
 
 const store = new ProductStore()
 
 describe('2. Unit testing the Product Model', () => {
-  let productID = '1';
+  let productID = '1'
 
   it('2.1 Should have an index method', () => {
     expect(store.index).toBeDefined()
@@ -30,7 +30,7 @@ describe('2. Unit testing the Product Model', () => {
       price: '50'
     })
 
-    productID = result.id + ""
+    productID = result.id + ''
 
     expect(result).toBeTruthy()
   })
@@ -58,68 +58,64 @@ describe('2. Unit testing the Product Model', () => {
   })
 })
 
+describe('2.10 Unit testing the Products Endpoints', (): void => {
+  let userToken: string
 
-describe('2.10 Unit testing the Products Endpoints', () : void => {
-	let userToken: string;
+  var originalTimeout: number
 
-  var originalTimeout: number;
-
-  beforeEach(function() {
-      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
-  });
+  beforeEach(function () {
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000
+  })
 
   it('2.11 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.post('/authenticate')
-		.send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
-    .set('Accept', 'application/json')
+      .post('/authenticate')
+      .send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
+      .set('Accept', 'application/json')
 
     userToken = response.body.token
 
     expect(userToken).toBeTruthy()
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(200)
   })
 
   it('2.12 Create the products endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.post('/products')
-    .send({ name: 'WibiClick', price: '50' })
-		.set('Authorization', `Basic ${userToken}`)
+      .post('/products')
+      .send({ name: 'WibiClick', price: '50' })
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('2.13 Update the products endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.put('/products')
-    .send({id: 1, name: 'New Product', price: '60'})
-		.set('Authorization', `Basic ${userToken}`)
+      .put('/products')
+      .send({ id: 1, name: 'New Product', price: '60' })
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('2.14 Gets the /products endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
-    const response = await request(app)
-		.get('/products')
+    const response = await request(app).get('/products')
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('2.15 Gets the /products/:id endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
-    const response = await request(app)
-		.get('/products/1')
+    const response = await request(app).get('/products/1')
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
-  afterEach(function() {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-  });
-
+  afterEach(function () {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+  })
 })

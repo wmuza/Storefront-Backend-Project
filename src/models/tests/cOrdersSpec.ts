@@ -1,6 +1,6 @@
 import app from '../../server'
 import dotenv from 'dotenv'
-import request from 'supertest';
+import request from 'supertest'
 import { OrderStore, OrderProducts } from '../orders'
 
 dotenv.config()
@@ -8,7 +8,7 @@ dotenv.config()
 const store = new OrderStore()
 
 describe('3. Unit testing the Order Model', () => {
-  let orderID = '1';
+  let orderID = '1'
 
   it('3.1 Should have an index method', () => {
     expect(store.index).toBeDefined()
@@ -75,79 +75,78 @@ describe('3. Unit testing the Order Model', () => {
   })
 })
 
-describe('3.10 Unit testing the Order Endpoints', () : void => {
-	let userToken: string;
+describe('3.10 Unit testing the Order Endpoints', (): void => {
+  let userToken: string
 
-  var originalTimeout: number;
+  var originalTimeout: number
 
-  beforeEach(function() {
-      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-      jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
-  });
+  beforeEach(function () {
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000
+  })
 
   it('3.11 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.post('/authenticate')
-		.send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
-    .set('Accept', 'application/json')
+      .post('/authenticate')
+      .send({ username: 'wmuza', password: process.env.POSTGRES_PASSWORD })
+      .set('Accept', 'application/json')
 
     userToken = response.body.token
 
     expect(userToken).toBeTruthy()
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(200)
   })
 
   it('3.12 Create the orders endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.post('/orders')
-    .send({ status: 'active', user_id: 1 })
-		.set('Authorization', `Basic ${userToken}`)
+      .post('/orders')
+      .send({ status: 'active', user_id: 1 })
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('3.13 Update the order endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.put('/orders')
-    .send({id: 1, status: 'complete', user_id: 1})
-		.set('Authorization', `Basic ${userToken}`)
+      .put('/orders')
+      .send({ id: 1, status: 'complete', user_id: 1 })
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('3.14 Create the order products endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.post('/orders/1/products')
-    .send({quantity: 12, order_id: 1, product_id: 1})
-		.set('Authorization', `Basic ${userToken}`)
+      .post('/orders/1/products')
+      .send({ quantity: 12, order_id: 1, product_id: 1 })
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('3.15 Gets the /orders endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.get('/orders')
-		.set('Authorization', `Basic ${userToken}`)
+      .get('/orders')
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
   it('3.16 Gets the /orders/:id endpoint', async (): Promise<void> => {
     //Test the endpoint and see if it returns status code of 200
     const response = await request(app)
-		.get('/orders/1')
-		.set('Authorization', `Basic ${userToken}`)
+      .get('/orders/1')
+      .set('Authorization', `Basic ${userToken}`)
 
-    expect(response.status).toEqual(200);
-  });
+    expect(response.status).toEqual(200)
+  })
 
-  afterEach(function() {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-  });
-
+  afterEach(function () {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+  })
 })

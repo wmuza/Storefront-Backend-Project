@@ -27,4 +27,4 @@ app.listen(3000, function () {
   process.env.ENV === 'test' ? '' : console.log(`starting app on: ${address}`)
 })
 
-export default app;
+export default app

@@ -4,8 +4,7 @@ import { Order } from '../models/orders'
 export class DashboardQueries {
   async currentOrderByUser(id: string): Promise<Order> {
     try {
-      const sql =
-        `SELECT name, status, quantity, price 
+      const sql = `SELECT name, status, quantity, price 
          FROM orders 
          INNER JOIN order_products ON orders.id = order_products.order_id 
          INNER JOIN products ON order_products.product_id = products.id
@@ -27,8 +26,7 @@ export class DashboardQueries {
 
   async completedOrdersByUser(id: string): Promise<Order[]> {
     try {
-      const sql =
-        `SELECT name, status, quantity, price 
+      const sql = `SELECT name, status, quantity, price 
          FROM orders 
          INNER JOIN order_products ON orders.id = order_products.order_id 
          INNER JOIN products ON order_products.product_id = products.id
@@ -49,12 +47,13 @@ export class DashboardQueries {
     }
   }
 
-  async fiveMostPopularProducts(): Promise<{ name: string; price: string | number }[]> {
+  async fiveMostPopularProducts(): Promise<
+    { name: string; price: string | number }[]
+  > {
     try {
       // @ts-ignore
       const conn = await Client.connect()
-      const sql =
-        `SELECT name, quantity, price 
+      const sql = `SELECT name, quantity, price 
          FROM order_products
          INNER JOIN products ON order_products.product_id = products.id
          ORDER BY order_products.quantity DESC

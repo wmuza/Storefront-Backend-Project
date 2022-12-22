@@ -59,7 +59,7 @@ const authenticate = async (req: Request, res: Response) => {
       process.env.TOKEN_SECRET as string
     )
 
-    res.json({token})
+    res.json({ token })
   } catch (err) {
     res.status(401)
     res.json(err)
