@@ -59,7 +59,7 @@ describe('1.10 Unit testing the users Endpoints', (): void => {
 
   beforeEach(function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000
   })
 
   it('1.11 Should authenticate user and return token on this endpoint /authenticate', async (): Promise<void> => {
