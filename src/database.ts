@@ -5,7 +5,7 @@ dotenv.config()
 
 const {
   POSTGRES_HOST,
-  POSTGRES_DB,
+  POSTGRES_DATABASE,
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_TEST_DB,
@@ -14,7 +14,7 @@ const {
 
 let db = {
   host: POSTGRES_HOST,
-  database: ENV === 'test' ? POSTGRES_TEST_DB : POSTGRES_DB,
+  database: ENV === 'test' ? POSTGRES_TEST_DB : POSTGRES_DATABASE,
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD
 }
